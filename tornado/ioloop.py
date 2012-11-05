@@ -188,6 +188,8 @@ class IOLoop(Configurable):
             # Python 2.6+ on BSD or Mac
             from tornado.platform.kqueue import KQueueIOLoop
             return KQueueIOLoop
+        gen_log.warning('Warning: kqueue or epoll not found. Using select() based implementation. This is '
+                        'expected if gevent.patch_all() or gevent.patch_select(aggressive=True) is used.')
         from tornado.platform.select import SelectIOLoop
         return SelectIOLoop
 
